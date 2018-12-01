@@ -20,9 +20,21 @@
         android:layout_margin="8dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:textStyle="bold"
         android:text="@string/txt_message"
         android:textColor="@android:color/black"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/SaveText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SAVE TEXT" />
+
+    <Button
+        android:id="@+id/HomeScreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Home" />
 
 </LinearLayout>

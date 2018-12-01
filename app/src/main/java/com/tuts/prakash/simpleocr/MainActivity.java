@@ -1,6 +1,8 @@
 package com.tuts.prakash.simpleocr;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -10,7 +12,10 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.content.Intent;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.text.TextBlock;
@@ -34,8 +39,24 @@ public class MainActivity extends AppCompatActivity {
 
         mCameraView = findViewById(R.id.surfaceView);
         mTextView = findViewById(R.id.text_view);
-
+        final Button saveButton = findViewById(R.id.SaveText);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d("SaveButton was clicked", "savebutton");
+            }
+        });
+        final Button homeScreen = findViewById(R.id.HomeScreen);
+        homeScreen.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d("HomeScreen was clicked", "homescreen");
+                openHomeActivity();
+            }
+        });
         startCameraSource();
+    }
+    public void openHomeActivity() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
     }
 
     @Override
