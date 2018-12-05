@@ -1,5 +1,6 @@
 package com.tuts.prakash.simpleocr;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -45,8 +47,28 @@ public class HomeActivity extends AppCompatActivity {
         final Button cameraButton = findViewById(R.id.cameraButton);
         cameraButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Context context = getApplicationContext();
+                CharSequence text = "Moving to Camera";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
                 Log.d("cameraButton clicked", "camerabutton");
                 openCameraActivity();
+            }
+        });
+
+        final Button filesButton = findViewById(R.id.files);
+        filesButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Context context = getApplicationContext();
+                CharSequence text = "Accessing Files";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+                Log.d("FilesButton clicked", "filesbutton");
+                //openCameraActivity();
             }
         });
     }

@@ -2,6 +2,7 @@ package com.tuts.prakash.simpleocr;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -16,6 +17,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.content.Intent;
+import android.widget.Toast;
+
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.text.TextBlock;
@@ -42,12 +45,22 @@ public class MainActivity extends AppCompatActivity {
         final Button saveButton = findViewById(R.id.SaveText);
         saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Context context = getApplicationContext();
+                CharSequence text = "Saving";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
                 Log.d("SaveButton was clicked", "savebutton");
             }
         });
         final Button homeScreen = findViewById(R.id.HomeScreen);
         homeScreen.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Context context = getApplicationContext();
+                CharSequence text = "Moving to Home";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
                 Log.d("HomeScreen was clicked", "homescreen");
                 openHomeActivity();
             }

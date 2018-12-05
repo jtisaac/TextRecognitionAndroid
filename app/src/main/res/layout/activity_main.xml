@@ -3,9 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:orientation="vertical"
     android:weightSum="5"
-    tools:context="com.tuts.prakash.simpleocr.MainActivity">
+    tools:context="com.tuts.prakash.simpleocr.MainActivity"
+    android:layout_alignParentBottom="true">
 
     <SurfaceView
         android:id="@+id/surfaceView"
@@ -29,12 +31,16 @@
         android:id="@+id/SaveText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@android:color/white"
         android:text="SAVE TEXT" />
 
     <Button
         android:id="@+id/HomeScreen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@android:color/white"
         android:text="Home" />
 
 </LinearLayout>
