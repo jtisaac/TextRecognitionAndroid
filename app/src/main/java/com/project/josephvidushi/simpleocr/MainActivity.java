@@ -1,7 +1,6 @@
-package com.tuts.prakash.simpleocr;
+package com.project.josephvidushi.simpleocr;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,11 +16,10 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.content.Intent;
 import android.widget.Toast;
 
+//Google Library imports for OCR
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.text.TextBlock;
@@ -31,23 +29,31 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Setting parameters -- The SurfaceView shows the camera view, the TextView shows the text being read, and the CameraSource is where the SurfaceView is being sourced from
     SurfaceView mCameraView;
     TextView mTextView;
     CameraSource mCameraSource;
 
     private static final String TAG = "MainActivity";
+
+    //Permission IDs
     private static final int requestPermissionIDcamera = 101;
     private static final int requestPermissionIDfile = 1000;
+
+    //Default file text
     private String texttosave = "No Text Yet";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //thanks to
+        //https://medium.com/@prakash_pun/text-recognition-for-android-using-google-mobile-vision-a8ffabe3f5d6
+        //for PERMISSION_GRANTED example
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
@@ -62,30 +68,15 @@ public class MainActivity extends AppCompatActivity {
             toast.show();
             e.printStackTrace();
         }
+
+        //Setting the parameters to ids described in the xml files
         mCameraView = findViewById(R.id.surfaceView);
         mTextView = findViewById(R.id.text_view);
+
         final Button saveButton = findViewById(R.id.SaveText);
         saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Context context = getApplicationContext();
-                /*try {
-
-                    if (ActivityCompat.checkSelfPermission(getApplicationContext(),
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-
-                        ActivityCompat.requestPermissions(MainActivity.this,
-                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                requestPermissionIDfile);
-                        Toast savetoast = Toast.makeText(context, "returning", Toast.LENGTH_LONG);
-                        savetoast.show();
-                        return;
-                    }
-                    //mCameraSource.start(mCameraView.getHolder());
-                } catch (Exception e) {
-                    Toast permissionsToast = Toast.makeText(context, e.toString(), Toast.LENGTH_LONG);
-                    permissionsToast.show();
-                    e.printStackTrace();
-                }*/
 
                 CharSequence text = "Saving";
                 int duration = Toast.LENGTH_SHORT;
@@ -96,20 +87,16 @@ public class MainActivity extends AppCompatActivity {
                 // android-studio-writing-text-to-a-file-using-a-save-button-in-the-menu for snippet
                 String filename = "OCR_Text.txt";
                 File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), filename);
-                Toast filer = Toast.makeText(context, "test" + getFileStreamPath(filename).toString(), duration);
+                //Toast filer = Toast.makeText(context, "test" + getFileStreamPath(filename).toString(), duration);
                 //filer.show();
 
                 try {
                     FileOutputStream output = new FileOutputStream(file);
-                    //OutputStreamWriter output = new OutputStreamWriter(openFileOutput("TextReaderFile", MODE_APPEND));
-                    //EditText ET = (EditText)findViewById(R.id.editText);
-                    //String text = ET.getText().toString();
                     output.write(texttosave.getBytes());
                     output.close();
                     Toast fileToast = Toast.makeText(context, "The contents are saved in the file.", duration);
                     fileToast.show();
                 } catch (FileNotFoundException e) {
-                    //Toast.makeText(this, "Exception: " + t.toString(), Toast.LENGTH_LONG).show();
                     Toast toaster = Toast.makeText(context, e.toString(), duration);
                     toaster.show();
                     e.printStackTrace();
@@ -139,6 +126,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //thanks to
+    //https://medium.com/@prakash_pun/text-recognition-for-android-using-google-mobile-vision-a8ffabe3f5d6
+    //for permissions help/example
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode != requestPermissionIDcamera || requestCode != requestPermissionIDfile) {
@@ -159,6 +149,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //thanks to
+    //https://medium.com/@prakash_pun/text-recognition-for-android-using-google-mobile-vision-a8ffabe3f5d6
+    //for method
     private void startCameraSource() {
 
         //Create the TextRecognizer

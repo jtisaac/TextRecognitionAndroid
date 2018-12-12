@@ -1,4 +1,4 @@
-package com.tuts.prakash.simpleocr;
+package com.project.josephvidushi.simpleocr;
 
 import android.content.Context;
 import android.content.Intent;
@@ -66,9 +66,15 @@ public class HomeActivity extends AppCompatActivity {
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
-
                 Log.d("FilesButton clicked", "filesbutton");
-                //openCameraActivity();
+
+                Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.android.documentsui");
+                if (launchIntent != null) {
+                    startActivity(launchIntent);
+                } else {
+                    Toast toasted = Toast.makeText(context, "could not find app", duration);
+                    toasted.show();
+                }
             }
         });
     }

@@ -6,7 +6,7 @@
     android:background="@drawable/background"
     android:orientation="vertical"
     android:weightSum="5"
-    tools:context="com.tuts.prakash.simpleocr.MainActivity"
+    tools:context="com.project.josephvidushi.simpleocr.MainActivity"
     android:layout_alignParentBottom="true">
 
     <SurfaceView
